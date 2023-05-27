@@ -7,10 +7,10 @@ class MeetingPageDetail extends StatefulWidget {
   MeetingPageDetail({Key? key, required this.meetingServiceSnapshot}) : super(key: key);
 
   @override
-  State<MeetingPageDetail> createState() => _GolfPageDetailState();
+  State<MeetingPageDetail> createState() => _MeetingPageDetailState();
 }
 
-class _GolfPageDetailState extends State<MeetingPageDetail> {
+class _MeetingPageDetailState extends State<MeetingPageDetail> {
   MeetingServiceSnapshot? meetingServiceSnapshot;
   @override
   Widget build(BuildContext context) {

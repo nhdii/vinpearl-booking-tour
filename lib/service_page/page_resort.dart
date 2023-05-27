@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:vinpearl_app/cart_page/cart_page.dart';
 import 'package:vinpearl_app/page_detail/page_resort_detail.dart';
 import 'package:vinpearl_app/service_data/resort_data.dart';
 
@@ -11,6 +12,7 @@ class ResortPage extends StatefulWidget {
 }
 
 class _ResortPageState extends State<ResortPage> {
+  List<ResortServiceSnapshot> cartItems = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,12 +23,15 @@ class _ResortPageState extends State<ResortPage> {
           actions: [
             GestureDetector(
               onTap: () {
-
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CartPage(),));
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: badges.Badge(
                   position: badges.BadgePosition.topEnd(top: 1, end: 0),
+                  badgeContent: Text(
+                    "${cartItems.length}"
+                  ),
                   badgeAnimation: const badges.BadgeAnimation.scale(),
                   child: const Icon(
                     Icons.shopping_cart,

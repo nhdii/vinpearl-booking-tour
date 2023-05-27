@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:vinpearl_app/page_home/home_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:vinpearl_app/cart_page/cart_model.dart';
 import 'package:vinpearl_app/widget_tree.dart';
 
 Future<void> main() async{
@@ -15,12 +16,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
+    return ChangeNotifierProvider(
+      create: (context) => CartModel(),
+      child: MaterialApp(
+        theme: ThemeData(
+          primarySwatch: Colors.grey,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const WidgetTree(),
       ),
-      debugShowCheckedModeBanner: false,
-      home: const WidgetTree(),
     );
   }
 }

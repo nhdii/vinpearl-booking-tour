@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:vinpearl_app/cart_page/cart_model.dart';
 import 'package:vinpearl_app/service_data/resort_data.dart';
+import 'package:provider/provider.dart';
 
 class ResortPageDetail extends StatefulWidget {
   ResortServiceSnapshot resortServiceSnapshot;
@@ -11,7 +13,7 @@ class ResortPageDetail extends StatefulWidget {
 }
 
 class _ResortPageDetailState extends State<ResortPageDetail> {
-  ResortServiceSnapshot? resortServiceSnapshot;
+  late ResortServiceSnapshot resortServiceSnapshot;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +31,7 @@ class _ResortPageDetailState extends State<ResortPageDetail> {
                         autoPlay: true,
                       ),
                       items:
-                        resortServiceSnapshot!.resortService.anh
+                        resortServiceSnapshot.resortService.anh
                         .map((item) {
                         return Container(
                           child: ClipRRect(
@@ -71,12 +73,12 @@ class _ResortPageDetailState extends State<ResortPageDetail> {
                         //Giá
                         Expanded(
                           flex: 4,
-                          child: Text("${resortServiceSnapshot!.resortService.gia} vnđ", style: const TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold, fontSize: 17),)),
+                          child: Text("${resortServiceSnapshot.resortService.gia} vnđ", style: const TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold, fontSize: 17),)),
                         Expanded(
                           child: Row(
                             children: [
                               const Icon(Icons.star, size: 16,),
-                              Text(resortServiceSnapshot!.resortService.xepLoai, style: TextStyle(fontSize: 16),)
+                              Text(resortServiceSnapshot.resortService.xepLoai, style: TextStyle(fontSize: 16),)
                             ],
                           )
                         )
@@ -84,7 +86,7 @@ class _ResortPageDetailState extends State<ResortPageDetail> {
                     ),
                     const SizedBox(height: 10,),
                     Text(
-                      resortServiceSnapshot!.resortService.tenDV,
+                      resortServiceSnapshot.resortService.tenDV,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -96,7 +98,7 @@ class _ResortPageDetailState extends State<ResortPageDetail> {
                       children: [
                         const Icon(Icons.phone_rounded),
                         const SizedBox(width: 5,),
-                        Text(resortServiceSnapshot!.resortService.sdt, style: const TextStyle(fontSize: 16),),
+                        Text(resortServiceSnapshot.resortService.sdt, style: const TextStyle(fontSize: 16),),
                       ],
                     ),
                     const SizedBox(height: 10,),
@@ -105,13 +107,13 @@ class _ResortPageDetailState extends State<ResortPageDetail> {
                         Image.asset("assets/images/maps-and-flags.png", width: 20,),
                         const SizedBox(width: 5,),
                         Expanded(
-                          child: Text(resortServiceSnapshot!.resortService.diaChi, style: const TextStyle(fontSize: 16)))
+                          child: Text(resortServiceSnapshot.resortService.diaChi, style: const TextStyle(fontSize: 16)))
                       ],
                     ),
                     const SizedBox(height: 10,),
                     const Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                     const SizedBox(height: 10,),
-                    Text(resortServiceSnapshot!.resortService.moTa)
+                    Text(resortServiceSnapshot.resortService.moTa)
                   ],
                 ),
               ),
@@ -119,26 +121,41 @@ class _ResortPageDetailState extends State<ResortPageDetail> {
                 child: Container(
                   width: 220,
                   padding: const EdgeInsets.only(bottom: 20, top: 20),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Add service to cart logic goes here
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Add to cart ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                        Icon(Icons.navigate_next_outlined,)
-                      ],
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      elevation: 10,
-                      shadowColor: Colors.grey,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)
-                      ),
-                      primary: Colors.orange[300],
-                      minimumSize: Size(220, 60),
-                    ),
+                  child: Consumer<CartModel>(
+                    builder: (context, cart, child) {
+                      final isInCart = cart.isInCart(resortServiceSnapshot);
+                      return ElevatedButton(
+                        onPressed: () {
+                          if (!isInCart) {
+                            cart.addToCart(resortServiceSnapshot);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    content: Text('Đã thêm vào giỏ hàng')));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(
+                                    'Dịch vụ đã có trong giỏ hàng')));
+                          }
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Add to cart ", style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),),
+                            Icon(Icons.navigate_next_outlined,)
+                          ],
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          elevation: 10,
+                          shadowColor: Colors.grey,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)
+                          ),
+                          primary: Colors.orange[300],
+                          minimumSize: Size(220, 60),
+                        ),
+                      );
+                    }
                   ),
                 ),
               ),
