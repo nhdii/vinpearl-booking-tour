@@ -50,7 +50,13 @@ class ResortServiceSnapshot {
     required this.resortService,
     required this.documentReference,
   });
-
+  // hàm get để lấy thông tin cho trang cart
+  String getTenDV() {
+    return resortService.tenDV;
+  }
+  String getAnh() {
+    return resortService.anh[0];
+  }
   factory ResortServiceSnapshot.fromSnapshot(DocumentSnapshot docSnapGolfService) {
     return ResortServiceSnapshot(
       resortService: ResortService.fromJson(docSnapGolfService.data() as Map<String, dynamic>),

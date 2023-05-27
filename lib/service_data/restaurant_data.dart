@@ -53,6 +53,12 @@ class RestaurantServiceSnapshot {
     required this.documentReference,
   });
 
+  String getTenDV() {
+    return restaurantService.tenDV;
+  }
+  String getAnh() {
+    return restaurantService.anh[0];
+  }
   factory RestaurantServiceSnapshot.fromSnapshot(DocumentSnapshot docSnapGolfService) {
     return RestaurantServiceSnapshot(
       restaurantService: RestaurantService.fromJson(docSnapGolfService.data() as Map<String, dynamic>),

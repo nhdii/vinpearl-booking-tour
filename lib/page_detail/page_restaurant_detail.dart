@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:vinpearl_app/service_data/restaurant_data.dart';
+
+import '../cart_page/cart_data.dart';
 
 class RestaurantPageDetail extends StatefulWidget {
   RestaurantServiceSnapshot restaurantServiceSnapshot;
@@ -120,7 +123,8 @@ class _RestaurantPageDetailState extends State<RestaurantPageDetail> {
                   padding: const EdgeInsets.only(bottom: 20, top: 20),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Add service to cart logic goes here
+                      final cartProvider = Provider.of<CartData>(context, listen: false);
+                      cartProvider.addItemToCart(restaurantServiceSnapshot!);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

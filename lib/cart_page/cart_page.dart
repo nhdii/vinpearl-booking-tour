@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:vinpearl_app/cart_page/cart_model.dart';
+import 'package:provider/provider.dart';
+import 'package:vinpearl_app/cart_page/cart_data.dart';
+
+import '../service_data/resort_data.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -9,10 +12,10 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  List<CartModel> cartItems = [];
-
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartData>(context);
+    final List<dynamic> cartItems = cartProvider.cartItems; // gọi provider và gán list để sử dụng
     return Scaffold(
       appBar: AppBar(
         title: Text('Giỏ hàng'),
@@ -20,7 +23,7 @@ class _CartPageState extends State<CartPage> {
       body: ListView.builder(
         itemCount: cartItems.length,
         itemBuilder: (context, index) {
-          final item = cartItems[index];
+          final item = cartItems[index]; // mỗi item ở đây là 1 snapshot ( resort, restaurantt, ... )
           return Container(
             padding: EdgeInsets.all(5.0),
             margin: EdgeInsets.all(8),
@@ -34,14 +37,17 @@ class _CartPageState extends State<CartPage> {
                   flex: 2,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(30),
-                    child: Image.network(item.cartItems.anh[0], fit: BoxFit.cover,))
+                    // tại vì là dynamic nên trong item sẽ nhiều kiểu khác nhau nên sẽ không truyền thẳng là item.resortService.anh[0] đc
+                      // vì thằng khác vd như restaurant sẽ lỗi nên thay vào đó ta tạo hàm get lấy thông tin của mỗi kiểu ở mỗi trang
+                      // data service của nó
+                    child: Image.network(item.getAnh(),fit: BoxFit.cover,))
                 ),
                 SizedBox(width: 5,),
                 Expanded(
                   flex: 3,
                   child: Column(
                     children: [
-                      Text(item.resortService.tenDV, style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                      Text(item.getTenDV(), style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                       ),
                       Row(
                         children: [

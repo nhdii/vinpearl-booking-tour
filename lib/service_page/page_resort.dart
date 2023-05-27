@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:provider/provider.dart';
+import 'package:vinpearl_app/cart_page/cart_data.dart';
 import 'package:vinpearl_app/cart_page/cart_page.dart';
 import 'package:vinpearl_app/page_detail/page_resort_detail.dart';
 import 'package:vinpearl_app/service_data/resort_data.dart';
@@ -29,8 +31,10 @@ class _ResortPageState extends State<ResortPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: badges.Badge(
                   position: badges.BadgePosition.topEnd(top: 1, end: 0),
-                  badgeContent: Text(
-                    "${cartItems.length}"
+                  badgeContent: Consumer<CartData>(
+                    builder: (context, value, child) {
+                      return Text("${value.cartItems.length}");
+                    },
                   ),
                   badgeAnimation: const badges.BadgeAnimation.scale(),
                   child: const Icon(

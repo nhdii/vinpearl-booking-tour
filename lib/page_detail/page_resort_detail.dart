@@ -1,8 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:vinpearl_app/cart_page/cart_model.dart';
 import 'package:vinpearl_app/service_data/resort_data.dart';
 import 'package:provider/provider.dart';
+
+import '../cart_page/cart_data.dart';
 
 class ResortPageDetail extends StatefulWidget {
   ResortServiceSnapshot resortServiceSnapshot;
@@ -121,41 +122,41 @@ class _ResortPageDetailState extends State<ResortPageDetail> {
                 child: Container(
                   width: 220,
                   padding: const EdgeInsets.only(bottom: 20, top: 20),
-                  child: Consumer<CartModel>(
-                    builder: (context, cart, child) {
-                      final isInCart = cart.isInCart(resortServiceSnapshot);
-                      return ElevatedButton(
-                        onPressed: () {
-                          if (!isInCart) {
-                            cart.addToCart(resortServiceSnapshot);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                    content: Text('Đã thêm vào giỏ hàng')));
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(
-                                    'Dịch vụ đã có trong giỏ hàng')));
-                          }
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Add to cart ", style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),),
-                            Icon(Icons.navigate_next_outlined,)
-                          ],
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          elevation: 10,
-                          shadowColor: Colors.grey,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)
-                          ),
-                          primary: Colors.orange[300],
-                          minimumSize: Size(220, 60),
-                        ),
-                      );
-                    }
+                  child: ElevatedButton(
+                    onPressed: () {
+                      final cartProvider = Provider.of<CartData>(context, listen: false);
+
+                      if(!cartProvider.isInCart(resortServiceSnapshot)){
+                        cartProvider.addItemToCart(resortServiceSnapshot);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text('Đã thêm vào giỏ hàng')
+                            )
+                        );
+                      }else{
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(
+                                'Dịch vụ đã có trong giỏ hàng')
+                            )
+                        );
+                      }
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Add to cart ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                        Icon(Icons.navigate_next_outlined,)
+                      ],
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      elevation: 10,
+                      shadowColor: Colors.grey,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)
+                      ),
+                      primary: Colors.orange[300],
+                      minimumSize: Size(220, 60),
+                    ),
                   ),
                 ),
               ),
