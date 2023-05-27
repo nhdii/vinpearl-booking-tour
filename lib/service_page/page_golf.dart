@@ -30,7 +30,7 @@ class _GolfPageState extends State<GolfPage> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: badges.Badge(
-                  position: badges.BadgePosition.topEnd(top: 1, end: 0),
+                  position: badges.BadgePosition.topEnd(top: -5, end: 0),
                   badgeContent: Consumer<CartData>(
                     builder: (context, value, child) {
                       return Text("${value.cartItems.length}");

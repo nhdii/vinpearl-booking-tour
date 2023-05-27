@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: badges.Badge(
-                  position: badges.BadgePosition.topEnd(top: 1, end: 0),
+                  position: badges.BadgePosition.topEnd(top: -5, end: 0),
                   badgeContent: Consumer<CartData>(
                     builder: (context, value, child) {
                       return Text("${value.cartItems.length}");
@@ -152,6 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
               const Text("VINPEARL", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.deepOrangeAccent),),
               const Text("Booking your tour", style: TextStyle(fontSize: 25),),
               const SizedBox(height: 35,),

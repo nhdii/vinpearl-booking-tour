@@ -79,7 +79,7 @@ class _ResortPageDetailState extends State<ResortPageDetail> {
                           child: Row(
                             children: [
                               const Icon(Icons.star, size: 16,),
-                              Text(resortServiceSnapshot.resortService.xepLoai, style: TextStyle(fontSize: 16),)
+                              Text(resortServiceSnapshot.resortService.xepLoai, style: const TextStyle(fontSize: 16),)
                             ],
                           )
                         )
@@ -129,33 +129,33 @@ class _ResortPageDetailState extends State<ResortPageDetail> {
                       if(!cartProvider.isInCart(resortServiceSnapshot)){
                         cartProvider.addItemToCart(resortServiceSnapshot);
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                                 content: Text('Đã thêm vào giỏ hàng')
                             )
                         );
                       }else{
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(
+                            const SnackBar(content: Text(
                                 'Dịch vụ đã có trong giỏ hàng')
                             )
                         );
                       }
                     },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Add to cart ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                        Icon(Icons.navigate_next_outlined,)
-                      ],
-                    ),
                     style: ElevatedButton.styleFrom(
                       elevation: 10,
+                      backgroundColor: Colors.orange[300],
                       shadowColor: Colors.grey,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)
                       ),
-                      primary: Colors.orange[300],
-                      minimumSize: Size(220, 60),
+                      minimumSize: const Size(220, 60),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text("Add to cart ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                        Icon(Icons.navigate_next_outlined,)
+                      ],
                     ),
                   ),
                 ),

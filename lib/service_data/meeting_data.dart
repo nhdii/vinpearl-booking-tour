@@ -64,8 +64,9 @@ class MeetingServiceSnapshot {
   String getAnh() {
     return meetingService.anh[0];
   }
-  String getGia(){
-    return meetingService.gia;
+  double getGia(){
+    final price = double.parse(meetingService.gia);
+    return price * getQuantity();
   }
 
   factory MeetingServiceSnapshot.fromSnapshot(DocumentSnapshot docSnapMeetingService) {
@@ -98,7 +99,7 @@ class MeetingServiceSnapshot {
 
   // Method to decrease quantity
   void decreaseQuantity() {
-    if (quantity > 1) {
+    if (quantity > 0) {
       quantity--;
     }
   }

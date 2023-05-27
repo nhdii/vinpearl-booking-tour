@@ -57,8 +57,9 @@ class ResortServiceSnapshot {
   String getAnh() {
     return resortService.anh[0];
   }
-  void updatePrice() {
-    resortService.gia = (double.parse(resortService.gia) * quantity).toString();
+  double getGia(){
+    final price = double.parse(resortService.gia);
+    return price * getQuantity();
   }
 
 
@@ -93,7 +94,7 @@ class ResortServiceSnapshot {
 
   // Method to decrease quantity
   void decreaseQuantity() {
-    if (quantity > 1) {
+    if (quantity > 0) {
       quantity--;
     }
   }

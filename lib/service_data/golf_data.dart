@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 class GolfService {
   List<dynamic> anh;
@@ -58,8 +60,22 @@ class GolfServiceSnapshot {
   String getAnh() {
     return golfService.anh[0];
   }
-  String getGia(){
-    return golfService.gia;
+  double getGia(){
+    final price = double.parse(golfService.gia);
+    return price * getQuantity();
+  }
+
+  int quantity = 1;
+  int getQuantity() {
+    return quantity;
+  }
+  void increaseQuantity() {
+    quantity++;
+  }
+  void decreaseQuantity() {
+    if (quantity > 0) {
+      quantity--;
+    }
   }
 
   factory GolfServiceSnapshot.fromSnapshot(DocumentSnapshot docSnapGolfService) {
@@ -79,22 +95,5 @@ class GolfServiceSnapshot {
     );
   }
 
-  int quantity = 1;
 
-  // Method to get quantity
-  int getQuantity() {
-    return quantity;
-  }
-
-  // Method to increase quantity
-  void increaseQuantity() {
-    quantity++;
-  }
-
-  // Method to decrease quantity
-  void decreaseQuantity() {
-    if (quantity > 1) {
-      quantity--;
-    }
-  }
 }

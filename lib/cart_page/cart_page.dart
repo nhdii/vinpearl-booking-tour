@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:vinpearl_app/cart_page/cart_data.dart';
-
-import '../service_data/resort_data.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -16,92 +15,135 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartData>(context);
     final List<dynamic> cartItems = cartProvider.cartItems; // gọi provider và gán list để sử dụng
+    double totalPrice = cartProvider.calculateTotalPrice();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Giỏ hàng'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Container(
+            padding: EdgeInsets.only(left: 100),
+            child: Text('Cart',)),
       ),
       body: ListView.builder(
         itemCount: cartItems.length,
         itemBuilder: (context, index) {
           final item = cartItems[index]; // mỗi item ở đây là 1 snapshot ( resort, restaurantt, ... )
-          return Container(
-            padding: EdgeInsets.all(5.0),
-            margin: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-              color: Colors.grey[300]
+          return Slidable(
+            startActionPane: const ActionPane(
+              motion: ScrollMotion(),
+              children: [],
             ),
-            child: Row(
+            endActionPane: ActionPane(
+              motion: ScrollMotion(),
               children: [
-                Expanded(
-                  flex: 2,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    // tại vì là dynamic nên trong item sẽ nhiều kiểu khác nhau nên sẽ không truyền thẳng là item.resortService.anh[0] đc
-                      // vì thằng khác vd như restaurant sẽ lỗi nên thay vào đó ta tạo hàm get lấy thông tin của mỗi kiểu ở mỗi trang
-                      // data service của nó
-                    child: Image.network(item.getAnh(),fit: BoxFit.cover,)),
-                ),
-                SizedBox(width: 5,),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                    children: [
-                      Text(item.getTenDV(), style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                      ),
-                      Row(
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.remove),
-                            onPressed: () {
-                              setState(() {
-                                item.decreaseQuantity(); // Decrease quantity
-                              });
-                            },
-                          ),
-                          Text(
-                            item.getQuantity().toString(), // Display quantity
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.add),
-                            onPressed: () {
-                              setState(() {
-                                item.increaseQuantity(); // Increase quantity
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      Text("${item.updatePrice()}")
-                    ],
-                  ),
-
-                ),
-
-
-
-              ],
+                SlidableAction(
+                  onPressed: (context) {
+                    cartProvider.removeFromCart(item);
+                  },
+                  icon: Icons.delete_forever,
+                  foregroundColor: Colors.red,
+                  backgroundColor: Colors.red[50]!,
+                )
+              ]
             ),
-            // child: ListTile(
-            //   leading: Image.network(item.resortService.anh[0]),
-            //   title: Text(item.resortService.tenDV),
-            //   subtitle: Text(item.resortService.gia),
-            //   trailing: IconButton(
-            //     icon: Icon(Icons.delete),
-            //     onPressed: () {
-            //       setState(() {
-            //         CartManager.removeFromCart(item);
-            //         ScaffoldMessenger.of(context).showSnackBar(
-            //           SnackBar(content: Text("Đã xóa thành công"),duration: Duration(seconds: 2),),
-            //         );
-            //       });
-            //     },
-            //   ),
-            // ),
+            child: Container(
+              padding: const EdgeInsets.all(5.0),
+              margin: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: Colors.grey[300]
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 150,
+                    height: 100,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      // tại vì là dynamic nên trong item sẽ nhiều kiểu khác nhau nên sẽ không truyền thẳng là item.resortService.anh[0] đc
+                        // vì thằng khác vd như restaurant sẽ lỗi nên thay vào đó ta tạo hàm get lấy thông tin của mỗi kiểu ở mỗi trang
+                        // data service của nó
+                      child: Image.network(item.getAnh(),fit: BoxFit.cover,)),
+                  ),
+                  const SizedBox(width: 5,),
+                  Expanded(
+                    flex: 3,
+                    child: Column(
+                      children: [
+                        Text(item.getTenDV(), style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                        ),
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.remove),
+                              onPressed: () {
+                                setState(() {
+                                  item.decreaseQuantity(); // Decrease quantity
+                                });
+                              },
+                            ),
+                            Text(
+                              item.getQuantity().toString() // giảm số lượng
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.add),
+                              onPressed: () {
+                                setState(() {
+                                  item.increaseQuantity(); //tăng sô lương
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                        Text(
+                          item.getGia().toString() + " VND", // hiển thị giá của mỗi item
+                          style: const TextStyle(color: Colors.orange, fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           );
         },
       ),
 
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.all(16),
+        color: Colors.teal[100],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Tổng tiền: ${totalPrice.toString()}',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                cartItems.clear();
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content: Text('Đã đặt thành công')
+                    )
+                );
+                // DateTime orderTime;
+              },
+              child: const Text('Đặt hàng'),
+              style: ElevatedButton.styleFrom(
+                elevation: 10,
+                backgroundColor: Colors.orange,
+                shadowColor: Colors.grey,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)
+                ),
+                minimumSize: const Size(110, 50),
+              ),
+            ),
+
+          ],
+        ),
+      ),
     );
   }
 }

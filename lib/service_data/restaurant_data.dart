@@ -59,8 +59,9 @@ class RestaurantServiceSnapshot {
   String getAnh() {
     return restaurantService.anh[0];
   }
-  String getGia(){
-    return restaurantService.gia;
+  double getGia(){
+    final price = double.parse(restaurantService.gia);
+    return price * getQuantity();
   }
 
   factory RestaurantServiceSnapshot.fromSnapshot(DocumentSnapshot docSnapGolfService) {
@@ -88,7 +89,7 @@ class RestaurantServiceSnapshot {
     quantity++;
   }
   void decreaseQuantity() {
-    if (quantity > 1) {
+    if (quantity > 0) {
       quantity--;
     }
   }
