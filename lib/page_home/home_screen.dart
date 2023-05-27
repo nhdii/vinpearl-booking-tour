@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:provider/provider.dart';
 import 'package:vinpearl_app/auth.dart';
 import 'package:vinpearl_app/cart_page/cart_page.dart';
 import 'package:vinpearl_app/page_detail/page_popular_service_detail.dart';
@@ -10,6 +11,8 @@ import 'package:vinpearl_app/service_page/meeting_page.dart';
 import 'package:vinpearl_app/service_page/page_golf.dart';
 import 'package:vinpearl_app/service_page/page_resort.dart';
 import 'package:vinpearl_app/service_page/page_restaurant.dart';
+
+import '../cart_page/cart_data.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -68,6 +71,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: badges.Badge(
                   position: badges.BadgePosition.topEnd(top: 1, end: 0),
+                  badgeContent: Consumer<CartData>(
+                    builder: (context, value, child) {
+                      return Text("${value.cartItems.length}");
+                    },
+                  ),
                   badgeAnimation: const badges.BadgeAnimation.scale(),
                   child: const Icon(
                     Icons.shopping_cart,

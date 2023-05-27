@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vinpearl_app/cart_page/cart_data.dart';
 import 'package:vinpearl_app/service_data/resort_data.dart';
 
 class PopularServiceDetail extends StatefulWidget {
@@ -119,7 +121,22 @@ class _PopularServiceDetailState extends State<PopularServiceDetail> {
                   padding: const EdgeInsets.only(bottom: 20, top: 20),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Add service to cart logic goes here
+                      final cartProvider = Provider.of<CartData>(context, listen: false);
+
+                      if(!cartProvider.isInCart(resortServiceSnapshot)){
+                        cartProvider.addItemToCart(resortServiceSnapshot);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text('Đã thêm vào giỏ hàng')
+                            )
+                        );
+                      }else{
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(
+                                'Dịch vụ đã có trong giỏ hàng')
+                            )
+                        );
+                      }
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

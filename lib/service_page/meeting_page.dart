@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:provider/provider.dart';
 import 'package:vinpearl_app/page_detail/page_meeting_detail.dart';
 import 'package:vinpearl_app/service_data/meeting_data.dart';
+
+import '../cart_page/cart_data.dart';
+import '../cart_page/cart_page.dart';
 
 class MeetingPage extends StatelessWidget {
   const MeetingPage({Key? key}) : super(key: key);
@@ -16,12 +20,17 @@ class MeetingPage extends StatelessWidget {
         actions: [
           GestureDetector(
             onTap: () {
-
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CartPage(),));
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: badges.Badge(
                 position: badges.BadgePosition.topEnd(top: 1, end: 0),
+                badgeContent: Consumer<CartData>(
+                  builder: (context, value, child) {
+                    return Text("${value.cartItems.length}");
+                  },
+                ),
                 badgeAnimation: const badges.BadgeAnimation.scale(),
                 child: const Icon(
                   Icons.shopping_cart,

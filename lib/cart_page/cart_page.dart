@@ -40,7 +40,7 @@ class _CartPageState extends State<CartPage> {
                     // tại vì là dynamic nên trong item sẽ nhiều kiểu khác nhau nên sẽ không truyền thẳng là item.resortService.anh[0] đc
                       // vì thằng khác vd như restaurant sẽ lỗi nên thay vào đó ta tạo hàm get lấy thông tin của mỗi kiểu ở mỗi trang
                       // data service của nó
-                    child: Image.network(item.getAnh(),fit: BoxFit.cover,))
+                    child: Image.network(item.getAnh(),fit: BoxFit.cover,)),
                 ),
                 SizedBox(width: 5,),
                 Expanded(
@@ -51,10 +51,28 @@ class _CartPageState extends State<CartPage> {
                       ),
                       Row(
                         children: [
-                          Text("Quantity"),
-
+                          IconButton(
+                            icon: Icon(Icons.remove),
+                            onPressed: () {
+                              setState(() {
+                                item.decreaseQuantity(); // Decrease quantity
+                              });
+                            },
+                          ),
+                          Text(
+                            item.getQuantity().toString(), // Display quantity
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () {
+                              setState(() {
+                                item.increaseQuantity(); // Increase quantity
+                              });
+                            },
+                          ),
                         ],
-                      )
+                      ),
+                      Text("${item.updatePrice()}")
                     ],
                   ),
 

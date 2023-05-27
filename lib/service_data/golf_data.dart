@@ -52,6 +52,16 @@ class GolfServiceSnapshot {
     required this.documentReference,
   });
 
+  String getTenDV() {
+    return golfService.tenDV;
+  }
+  String getAnh() {
+    return golfService.anh[0];
+  }
+  String getGia(){
+    return golfService.gia;
+  }
+
   factory GolfServiceSnapshot.fromSnapshot(DocumentSnapshot docSnapGolfService) {
     return GolfServiceSnapshot(
       golfService: GolfService.fromJson(docSnapGolfService.data() as Map<String, dynamic>),
@@ -67,5 +77,24 @@ class GolfServiceSnapshot {
             (queryInfo) => queryInfo.docs);
     return streamListDocSnap.map((listDS) => listDS.map((ds) => GolfServiceSnapshot.fromSnapshot(ds)).toList()
     );
+  }
+
+  int quantity = 1;
+
+  // Method to get quantity
+  int getQuantity() {
+    return quantity;
+  }
+
+  // Method to increase quantity
+  void increaseQuantity() {
+    quantity++;
+  }
+
+  // Method to decrease quantity
+  void decreaseQuantity() {
+    if (quantity > 1) {
+      quantity--;
+    }
   }
 }

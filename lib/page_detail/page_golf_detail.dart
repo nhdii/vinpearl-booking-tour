@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:vinpearl_app/service_data/golf_data.dart';
+
+import '../cart_page/cart_data.dart';
 
 class GolfPageDetail extends StatefulWidget {
   GolfServiceSnapshot golfServiceSnapshot;
@@ -133,8 +136,22 @@ class _GolfPageDetailState extends State<GolfPageDetail> {
                   padding: const EdgeInsets.only(bottom: 20, top: 20),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Add service to cart logic goes here
-                    },
+                      final cartProvider = Provider.of<CartData>(context, listen: false);
+
+                      if(!cartProvider.isInCart(golfServiceSnapshot)){
+                        cartProvider.addItemToCart(golfServiceSnapshot);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text('Đã thêm vào giỏ hàng')
+                            )
+                        );
+                      }else{
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(
+                                'Dịch vụ đã có trong giỏ hàng')
+                            )
+                        );
+                      }                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

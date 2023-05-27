@@ -58,6 +58,16 @@ class MeetingServiceSnapshot {
     required this.documentReference,
   });
 
+  String getTenDV() {
+    return meetingService.tenDV;
+  }
+  String getAnh() {
+    return meetingService.anh[0];
+  }
+  String getGia(){
+    return meetingService.gia;
+  }
+
   factory MeetingServiceSnapshot.fromSnapshot(DocumentSnapshot docSnapMeetingService) {
     return MeetingServiceSnapshot(
       meetingService: MeetingService.fromJson(docSnapMeetingService.data() as Map<String, dynamic>),
@@ -72,5 +82,24 @@ class MeetingServiceSnapshot {
             (queryInfo) => queryInfo.docs);
     return streamListDocSnap.map((listDS) => listDS.map((ds) => MeetingServiceSnapshot.fromSnapshot(ds)).toList()
     );
+  }
+
+  int quantity = 1;
+
+  // Method to get quantity
+  int getQuantity() {
+    return quantity;
+  }
+
+  // Method to increase quantity
+  void increaseQuantity() {
+    quantity++;
+  }
+
+  // Method to decrease quantity
+  void decreaseQuantity() {
+    if (quantity > 1) {
+      quantity--;
+    }
   }
 }

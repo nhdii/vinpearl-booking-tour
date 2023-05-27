@@ -59,6 +59,10 @@ class RestaurantServiceSnapshot {
   String getAnh() {
     return restaurantService.anh[0];
   }
+  String getGia(){
+    return restaurantService.gia;
+  }
+
   factory RestaurantServiceSnapshot.fromSnapshot(DocumentSnapshot docSnapGolfService) {
     return RestaurantServiceSnapshot(
       restaurantService: RestaurantService.fromJson(docSnapGolfService.data() as Map<String, dynamic>),
@@ -74,5 +78,18 @@ class RestaurantServiceSnapshot {
             (queryInfo) => queryInfo.docs);
     return streamListDocSnap.map((listDS) => listDS.map((ds) => RestaurantServiceSnapshot.fromSnapshot(ds)).toList()
     );
+  }
+
+  int quantity = 1;
+  int getQuantity() {
+    return quantity;
+  }
+  void increaseQuantity() {
+    quantity++;
+  }
+  void decreaseQuantity() {
+    if (quantity > 1) {
+      quantity--;
+    }
   }
 }

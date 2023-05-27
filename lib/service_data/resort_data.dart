@@ -57,6 +57,11 @@ class ResortServiceSnapshot {
   String getAnh() {
     return resortService.anh[0];
   }
+  void updatePrice() {
+    resortService.gia = (double.parse(resortService.gia) * quantity).toString();
+  }
+
+
   factory ResortServiceSnapshot.fromSnapshot(DocumentSnapshot docSnapGolfService) {
     return ResortServiceSnapshot(
       resortService: ResortService.fromJson(docSnapGolfService.data() as Map<String, dynamic>),
@@ -72,5 +77,24 @@ class ResortServiceSnapshot {
             (queryInfo) => queryInfo.docs);
     return streamListDocSnap.map((listDS) => listDS.map((ds) => ResortServiceSnapshot.fromSnapshot(ds)).toList()
     );
+  }
+
+  int quantity = 1;
+
+  // Method to get quantity
+  int getQuantity() {
+    return quantity;
+  }
+
+  // Method to increase quantity
+  void increaseQuantity() {
+    quantity++;
+  }
+
+  // Method to decrease quantity
+  void decreaseQuantity() {
+    if (quantity > 1) {
+      quantity--;
+    }
   }
 }

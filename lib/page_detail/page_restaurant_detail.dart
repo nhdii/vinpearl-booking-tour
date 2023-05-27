@@ -124,7 +124,21 @@ class _RestaurantPageDetailState extends State<RestaurantPageDetail> {
                   child: ElevatedButton(
                     onPressed: () {
                       final cartProvider = Provider.of<CartData>(context, listen: false);
-                      cartProvider.addItemToCart(restaurantServiceSnapshot!);
+
+                      if(!cartProvider.isInCart(restaurantServiceSnapshot)){
+                        cartProvider.addItemToCart(restaurantServiceSnapshot);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text('Đã thêm vào giỏ hàng')
+                            )
+                        );
+                      }else{
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(
+                                'Dịch vụ đã có trong giỏ hàng')
+                            )
+                        );
+                      }
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
