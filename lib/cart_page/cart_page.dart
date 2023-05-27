@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
+import 'package:vinpearl_app/auth.dart';
 import 'package:vinpearl_app/cart_page/cart_data.dart';
+import 'package:vinpearl_app/orderHistory/order_data.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -11,6 +14,11 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  final  User? user = Auth().currentUser;
+  Widget _userUid(){
+    return Text(user?.email ?? 'User email');
+  }
+
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartData>(context);
@@ -120,7 +128,16 @@ class _CartPageState extends State<CartPage> {
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async{
+                Order order = Order(
+                  email: user!.email!,
+                  id: "1",
+                  sl: cartItems.length,
+                  gia: totalPrice.toString(),
+                  tenDV: cartItems[0].getTenDV(),
+                  orderDate: DateTime.now(),
+                );
+                await OrderSnapshot.datHang(order);
                 cartItems.clear();
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(

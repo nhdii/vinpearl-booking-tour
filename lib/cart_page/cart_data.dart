@@ -1,20 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class Order{
-  String id, tenDV, gia;
-  int sl;
-  DateTime orderDate;
-
-  Order({
-    required this.id,
-    required this.tenDV,
-    required this.gia,
-    required this.sl,
-    required this.orderDate,
-  });
-}
-
 class CartData extends ChangeNotifier {
 
   List<dynamic> _cartItems = [];
