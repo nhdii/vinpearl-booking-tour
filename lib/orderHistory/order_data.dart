@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Order{
-  String email, id, tenDV, gia;
+  String email, id, gia, tenDV;
   int sl;
   DateTime orderDate;
 
@@ -53,16 +53,40 @@ class OrderSnapshot{
     );
   }
 
-  static Future<DocumentReference> datHang(Order order) async{
-    return  FirebaseFirestore.instance.collection("Order").add(order.toJson());
+  static Future<void> datHang(List<Order> orders, String email) async {
+    await FirebaseFirestore.instance.collection('Order').add({
+      'email': email,
+      'orders': orders.map((order) => order.toJson()).toList(),
+    });
   }
 
-  static Stream<List<OrderSnapshot>> listOrder(){
+  static Stream<List<OrderSnapshot>> listOrder() {
+    Stream<QuerySnapshot> streamQS = FirebaseFirestore.instance
+        .collection('Order')
+        .snapshots();
+    return streamQS.map((queryInfo) => queryInfo.docs
+        .map((docSnapOrder) => OrderSnapshot(
+      order: Order(
+        email: docSnapOrder.get('email') as String,
+        tenDV: '',
+        gia: '',
+        id: '',
+        sl: 0,
+        orderDate: DateTime.now(),
+      ),
+      documentReference: docSnapOrder.reference,
+    )).toList());
+  }
+
+
+  static Stream<List<OrderSnapshot>> listOrderByEmail(String email) {
     Stream<QuerySnapshot> streamQS = FirebaseFirestore.instance.collection("Order")
+        .where('email', isEqualTo: email)
         .snapshots();
     Stream<List<DocumentSnapshot>> streamListDocSnap = streamQS.map(
             (queryInfo) => queryInfo.docs);
-    return streamListDocSnap.map((listDS) => listDS.map((ds) => OrderSnapshot.fromSnapshot(ds)).toList()
-    );
+    return streamListDocSnap.map((listDS) => listDS.map(
+            (ds) => OrderSnapshot.fromSnapshot(ds)).toList());
   }
+
 }

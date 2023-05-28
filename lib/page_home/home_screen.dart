@@ -4,6 +4,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
 import 'package:vinpearl_app/auth.dart';
 import 'package:vinpearl_app/cart_page/cart_page.dart';
+import 'package:vinpearl_app/orderHistory/your_bill.dart';
 import 'package:vinpearl_app/page_detail/page_popular_service_detail.dart';
 import 'package:vinpearl_app/page_profile/page_profile.dart';
 import 'package:vinpearl_app/service_data/resort_data.dart';
@@ -124,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
               leading: const Icon(Icons.receipt_long_outlined),
               title: const Text('Your Bill', style: TextStyle(fontSize: 16)),
               onTap: () {
-                // Xử lý khi người dùng chọn mục xem bill
+                Navigator.push(context, MaterialPageRoute(builder: (context) => OrderHistoryPage(),));
               },
             ),
             ListTile(

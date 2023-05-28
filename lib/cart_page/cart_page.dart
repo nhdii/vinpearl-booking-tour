@@ -4,7 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:vinpearl_app/auth.dart';
 import 'package:vinpearl_app/cart_page/cart_data.dart';
-import 'package:vinpearl_app/orderHistory/order_data.dart';
+import '../orderHistory/order_data.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -24,6 +24,7 @@ class _CartPageState extends State<CartPage> {
     final cartProvider = Provider.of<CartData>(context);
     final List<dynamic> cartItems = cartProvider.cartItems; // gọi provider và gán list để sử dụng
     double totalPrice = cartProvider.calculateTotalPrice();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -129,24 +130,38 @@ class _CartPageState extends State<CartPage> {
             ),
             ElevatedButton(
               onPressed: () async{
-                Order order = Order(
-                  email: user!.email!,
-                  id: "1",
-                  sl: cartItems.length,
-                  gia: totalPrice.toString(),
-                  tenDV: cartItems[0].getTenDV(),
-                  orderDate: DateTime.now(),
-                );
-                await OrderSnapshot.datHang(order);
-                cartItems.clear();
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text('Đã đặt thành công')
-                    )
-                );
-                // DateTime orderTime;
+                List<Order> orders = [];
+                if(cartItems != null){
+                  for(var item in cartItems) {
+                    Order order = Order(
+                      email: user!.email!,
+                      id: "1",
+                      sl: cartItems.length,
+                      gia: totalPrice.toString(),
+                      tenDV: item.getTenDV(),
+                      orderDate: DateTime.now(),
+                    );
+                    orders.add(order);
+                  }
+                }
+                try {
+                  await OrderSnapshot.datHang(orders, user!.email!);
+                  cartItems.clear();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Đã đặt thành công')
+                      )
+                  );
+                } catch (e) {
+                  print('Error: $e');
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                          content: Text('Có lỗi xảy ra. Vui lòng thử lại sau.')
+                      )
+                  );
+                }
               },
-              child: const Text('Đặt hàng'),
+              child: const Text('Đặt Vé'),
               style: ElevatedButton.styleFrom(
                 elevation: 10,
                 backgroundColor: Colors.orange,
