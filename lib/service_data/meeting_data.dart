@@ -99,7 +99,7 @@ class MeetingServiceSnapshot {
 
   // Method to decrease quantity
   void decreaseQuantity() {
-    if (quantity > 0) {
+    if (quantity > 1) {
       quantity--;
     }
   }

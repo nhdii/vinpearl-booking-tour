@@ -72,7 +72,7 @@ class ResortServiceSnapshot {
     quantity++;
   }
   void decreaseQuantity() {
-    if (quantity > 0) {
+    if (quantity > 1) {
       quantity--;
     }
   }

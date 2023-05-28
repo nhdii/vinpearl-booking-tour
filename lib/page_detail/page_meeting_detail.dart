@@ -198,7 +198,7 @@ class _MeetingPageDetailState extends State<MeetingPageDetail> {
                     const SizedBox(height: 20,),
                     const Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                     const SizedBox(height: 10,),
-                    Text(meetingServiceSnapshot!.meetingService.moTa)
+                    Text(meetingServiceSnapshot!.meetingService.moTa, style: TextStyle(fontSize: 16),textAlign: TextAlign.justify,)
                   ],
                 ),
               ),

@@ -75,7 +75,7 @@ class _PopularServiceDetailState extends State<PopularServiceDetail> {
                         Expanded(
                             child: Row(
                               children: [
-                                const Icon(Icons.star, size: 16,),
+                                const Icon(Icons.star, size: 16, color: Colors.orangeAccent,),
                                 Text(resortServiceSnapshot!.resortService.xepLoai, style: TextStyle(fontSize: 16),)
                               ],
                             )
@@ -111,7 +111,7 @@ class _PopularServiceDetailState extends State<PopularServiceDetail> {
                     const SizedBox(height: 10,),
                     const Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                     const SizedBox(height: 10,),
-                    Text(resortServiceSnapshot!.resortService.moTa)
+                    Text(resortServiceSnapshot!.resortService.moTa, style: TextStyle(fontSize: 16), textAlign: TextAlign.justify,)
                   ],
                 ),
               ),

@@ -96,7 +96,7 @@ class _GolfPageState extends State<GolfPage> {
                               flex: 3,
                               child: ClipRRect(
                                   borderRadius: BorderRadius.circular(30),
-                                  child: Image.network(list[index].golfService!.anh[0],width: 400, fit: BoxFit.cover)
+                                  child: Image.network(list[index].golfService.anh[0],width: 400, fit: BoxFit.cover)
                               ),
                             ),
                             Expanded(

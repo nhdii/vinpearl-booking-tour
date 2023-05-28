@@ -65,6 +65,7 @@ class GolfServiceSnapshot {
     return price * getQuantity();
   }
 
+  //lấy số lượng
   int quantity = 1;
   int getQuantity() {
     return quantity;
@@ -73,7 +74,7 @@ class GolfServiceSnapshot {
     quantity++;
   }
   void decreaseQuantity() {
-    if (quantity > 0) {
+    if (quantity > 1) {
       quantity--;
     }
   }

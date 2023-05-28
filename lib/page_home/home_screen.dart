@@ -96,23 +96,26 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.zero,
           children: <Widget>[
            DrawerHeader(
+             padding: EdgeInsets.zero,
              child: Container(
+               color: Colors.orangeAccent,
                child: Padding(
-                 padding: const EdgeInsets.all(8.0),
+                 padding: const EdgeInsets.all(15.0),
                  child: Column(
                    crossAxisAlignment: CrossAxisAlignment.start,
                    mainAxisAlignment: MainAxisAlignment.center,
                    children: <Widget>[
                      CircleAvatar(
                        child: Text(user!.email!.substring(0,1), style: const TextStyle(fontSize: 30),),
-                       backgroundColor: Colors.cyan,
+                       backgroundColor: Colors.deepPurple,
                        maxRadius: 30,
                      ),
                      _userUid(),
                    ],
                  ),
                ),
-             ),),
+             ),
+           ),
 
             ListTile(
               leading: const Icon(Icons.person_outline),
@@ -352,7 +355,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       physics: const NeverScrollableScrollPhysics(),
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 1,
-                        childAspectRatio: 1.9,
+                        childAspectRatio: 1.7,
                         mainAxisSpacing: 25,
                       ),
                       // itemCount: popularServic`es.length,
@@ -386,64 +389,67 @@ class _HomeScreenState extends State<HomeScreen> {
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         // name Service
-                                        Text(
-                                          list[index].resortService!.tenDV,
-                                          style: const TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.blue
+                                        Expanded(
+                                          child: Text(
+                                            list[index].resortService!.tenDV,
+                                            style: const TextStyle(
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.blue
+                                            ),
                                           ),
                                         ),
 
-                                        const SizedBox(height: 15,),
-
                                         //Phone number
-                                        Row(
-                                          children: [
-                                            const Icon(
-                                              Icons.phone_outlined, size: 20,
-                                            ),
-                                            Text(list[index].resortService.sdt,style: const TextStyle(fontSize: 13),)
-                                          ],
+                                        Expanded(
+                                          child: Row(
+                                            children: [
+                                              const Icon(
+                                                Icons.phone_outlined, size: 22,
+                                              ),
+                                              Text(list[index].resortService.sdt,style: const TextStyle(fontSize: 16),)
+                                            ],
+                                          ),
                                         ),
-
-                                        const SizedBox(height: 15,),
 
                                         // address
-                                        Row(
-                                          children: [
-                                            Image.asset(
-                                              "assets/images/maps-and-flags.png",
-                                              width: 20,),
-                                            Expanded(
-                                                child: Text(list[index].resortService!.diaChi,
-                                                  style: const TextStyle(fontSize: 13),
-                                                  overflow: TextOverflow.ellipsis,))
-                                          ],
+                                        Expanded(
+                                          child: Row(
+                                            children: [
+                                              Image.asset(
+                                                "assets/images/maps-and-flags.png",
+                                                width: 22,),
+                                              Expanded(
+                                                  child: Text(list[index].resortService!.diaChi,
+                                                    style: const TextStyle(fontSize: 16),
+                                                    overflow: TextOverflow.ellipsis,))
+                                            ],
+                                          ),
                                         ),
 
-                                        const SizedBox(height: 15,),
-
                                         // rating
-                                        Row(
-                                          children: [
-                                            const Icon(Icons.star, size: 20),
-                                            Text(list[index].resortService!.xepLoai,
-                                                style: const TextStyle(fontSize: 13)),
-                                          ],
+                                        Expanded(
+                                          child: Row(
+                                            children: [
+                                              const Icon(Icons.star, size: 22),
+                                              Text(list[index].resortService!.xepLoai,
+                                                  style: const TextStyle(fontSize: 16)),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
                                   ),
                                 ),
-                                ClipRRect(
+                                Expanded(
+                                  child: ClipRRect(
                                     borderRadius: BorderRadius.circular(30),
                                     child: Image.network(
                                         "${list[index].resortService.anh[0]}",
-                                        width: 170,
-                                        height: 180,
+                                        height: 200,
                                         fit: BoxFit.cover)
                                 ),
+                                )
                               ],
                             ),
                           ),

@@ -78,7 +78,7 @@ class _RestaurantPageDetailState extends State<RestaurantPageDetail> {
                           flex: 1,
                           child: Row(
                             children: [
-                              const Icon(Icons.star, size: 16,),
+                              const Icon(Icons.star, size: 16, color: Colors.orangeAccent,),
                               Text(restaurantServiceSnapshot!.restaurantService.xepLoai, style: const TextStyle(fontSize: 16),)
                           ],
                           )
@@ -113,7 +113,7 @@ class _RestaurantPageDetailState extends State<RestaurantPageDetail> {
                     const SizedBox(height: 10,),
                     const Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                     const SizedBox(height: 10,),
-                    Text(restaurantServiceSnapshot!.restaurantService.moTa, style: TextStyle(fontSize: 15), textAlign: TextAlign.justify,)
+                    Text(restaurantServiceSnapshot!.restaurantService.moTa, style: TextStyle(fontSize: 16), textAlign: TextAlign.justify,)
                   ],
                 ),
               ),

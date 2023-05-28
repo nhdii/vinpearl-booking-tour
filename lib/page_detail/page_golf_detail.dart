@@ -73,13 +73,13 @@ class _GolfPageDetailState extends State<GolfPageDetail> {
                         //Giá
                         Expanded(
                           flex: 4,
-                          child: Text("${golfServiceSnapshot!.golfService.gia} vnđ", style: TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold, fontSize: 20),)),
+                          child: Text("${golfServiceSnapshot!.golfService.gia} vnđ", style: TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold, fontSize: 22),)),
                         Expanded(
                           flex: 1,
                           child: Row(
                             children: [
-                              Icon(Icons.star, size: 16,),
-                              Text(golfServiceSnapshot!.golfService.xepLoai, style: TextStyle(fontSize: 16),)
+                              Icon(Icons.star, size: 16, color: Colors.orangeAccent,),
+                              Text(golfServiceSnapshot!.golfService.xepLoai, style: TextStyle(fontSize: 16, ),)
                             ],
                           )
                         )
@@ -126,7 +126,7 @@ class _GolfPageDetailState extends State<GolfPageDetail> {
                     SizedBox(height: 20,),
                     const Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                     SizedBox(height: 10,),
-                    Text(golfServiceSnapshot!.golfService.moTa)
+                    Text(golfServiceSnapshot!.golfService.moTa, style: TextStyle(fontSize: 16),textAlign: TextAlign.justify,)
                   ],
                 ),
               ),

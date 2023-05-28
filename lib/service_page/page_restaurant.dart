@@ -94,14 +94,14 @@ class RestaurantPage extends StatelessWidget {
                       child: Column(
                         children: [
                           Expanded(
-                            flex: 4,
+                            flex: 5,
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(30),
-                                child: Image.network(list[index].restaurantService.anh[0], width: 400, fit: BoxFit.cover)
+                                child: Image.network(list[index].restaurantService.anh[0], width: 500, fit: BoxFit.cover)
                             ),
                           ),
                           Expanded(
-                              flex: 2,
+                              flex: 3,
                               child: Padding(
                                 padding: const EdgeInsets.all(7.0),
                                 child: Column(
