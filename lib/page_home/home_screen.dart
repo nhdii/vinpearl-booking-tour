@@ -4,7 +4,6 @@ import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
 import 'package:vinpearl_app/auth.dart';
 import 'package:vinpearl_app/cart_page/cart_page.dart';
-import 'package:vinpearl_app/orderHistory/your_bill.dart';
 import 'package:vinpearl_app/page_detail/page_popular_service_detail.dart';
 import 'package:vinpearl_app/page_profile/page_profile.dart';
 import 'package:vinpearl_app/service_data/resort_data.dart';
@@ -12,6 +11,7 @@ import 'package:vinpearl_app/service_page/meeting_page.dart';
 import 'package:vinpearl_app/service_page/page_golf.dart';
 import 'package:vinpearl_app/service_page/page_resort.dart';
 import 'package:vinpearl_app/service_page/page_restaurant.dart';
+import 'package:vinpearl_app/your_bill_page/your_bill.dart';
 
 import '../cart_page/cart_data.dart';
 

@@ -4,7 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:vinpearl_app/auth.dart';
 import 'package:vinpearl_app/cart_page/cart_data.dart';
-import '../orderHistory/order_data.dart';
+import 'package:vinpearl_app/your_bill_page/order_data.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -15,9 +15,6 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   final  User? user = Auth().currentUser;
-  Widget _userUid(){
-    return Text(user?.email ?? 'User email');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +102,7 @@ class _CartPageState extends State<CartPage> {
                           ],
                         ),
                         Text(
-                          item.getGia().toString() + " VND", // hiển thị giá của mỗi item
+                          item.getGia().toStringAsFixed(0) + " VND", // hiển thị giá của mỗi item
                           style: const TextStyle(color: Colors.orange, fontWeight: FontWeight.bold, fontSize: 15),
                         ),
                       ],
@@ -125,41 +122,51 @@ class _CartPageState extends State<CartPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Tổng tiền: ${totalPrice.toString()}',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              'Tổng tiền: ${totalPrice.toStringAsFixed(0)}',
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             ElevatedButton(
               onPressed: () async{
-                List<Order> orders = [];
-                if(cartItems != null){
-                  for(var item in cartItems) {
-                    Order order = Order(
-                      email: user!.email!,
-                      id: "1",
-                      sl: cartItems.length,
-                      gia: totalPrice.toString(),
-                      tenDV: item.getTenDV(),
-                      orderDate: DateTime.now(),
-                    );
-                    orders.add(order);
-                  }
-                }
-                try {
-                  await OrderSnapshot.datHang(orders, user!.email!);
+                Order order = Order(
+                  orders: cartItems.map((item) => OrderItem(
+                    tenDV: item.getTenDV(),
+                    sl: item.getQuantity(),
+                    gia: totalPrice.toString(),
+                    orderDate: DateTime.now(),
+                  )).toList(),
+                  email: user?.email,
+                );
+
+                try{
+                  await OrderSnapshot.addOrderToFirebase(order);
                   cartItems.clear();
                   ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text('Đã đặt thành công')
-                      )
+                    const SnackBar(
+                        content: Text("Đặt thành công"))
                   );
-                } catch (e) {
+                }catch(e){
                   print('Error: $e');
                   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                          content: Text('Có lỗi xảy ra. Vui lòng thử lại sau.')
-                      )
+                    SnackBar(content: Text("Có lỗi xảy ra. Vui lòng thử lại sau."))
                   );
                 }
+
+                // try {
+                //   await OrderSnapshot.datHang(orders, user!.email!);
+                //   cartItems.clear();
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //       const SnackBar(
+                //           content: Text('Đã đặt thành công')
+                //       )
+                //   );
+                // } catch (e) {
+                //   print('Error: $e');
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //       SnackBar(
+                //           content: Text('Có lỗi xảy ra. Vui lòng thử lại sau.')
+                //       )
+                //   );
+                // }
               },
               child: const Text('Đặt Vé'),
               style: ElevatedButton.styleFrom(
