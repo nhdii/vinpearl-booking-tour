@@ -73,7 +73,7 @@ class _RestaurantPageDetailState extends State<RestaurantPageDetail> {
                         //Giá
                         Expanded(
                           flex: 4,
-                          child: Text("${restaurantServiceSnapshot!.restaurantService.gia} vnđ", style: const TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold, fontSize: 18),)),
+                          child: Text("${restaurantServiceSnapshot!.restaurantService.gia} vnđ", style: const TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold, fontSize: 22),)),
                         Expanded(
                           flex: 1,
                           child: Row(
@@ -98,7 +98,7 @@ class _RestaurantPageDetailState extends State<RestaurantPageDetail> {
                       children: [
                         Icon(Icons.phone_rounded),
                         SizedBox(width: 5,),
-                        Text(restaurantServiceSnapshot!.restaurantService.sdt, style: const TextStyle(fontSize: 16),),
+                        Text(restaurantServiceSnapshot!.restaurantService.sdt, style: const TextStyle(fontSize: 18),),
                       ],
                     ),
                     const SizedBox(height: 10,),
@@ -107,13 +107,13 @@ class _RestaurantPageDetailState extends State<RestaurantPageDetail> {
                         Image.asset("assets/images/maps-and-flags.png", width: 20,),
                         SizedBox(width: 5,),
                         Expanded(
-                          child: Text(restaurantServiceSnapshot!.restaurantService.diaChi, style: TextStyle(fontSize: 16),))
+                          child: Text(restaurantServiceSnapshot!.restaurantService.diaChi, style: TextStyle(fontSize: 18),))
                       ],
                     ),
+                    const SizedBox(height: 20,),
+                    const Text("Description", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                     const SizedBox(height: 10,),
-                    const Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                    const SizedBox(height: 10,),
-                    Text(restaurantServiceSnapshot!.restaurantService.moTa, style: TextStyle(fontSize: 16), textAlign: TextAlign.justify,)
+                    Text(restaurantServiceSnapshot!.restaurantService.moTa, style: TextStyle(fontSize: 18), textAlign: TextAlign.justify,)
                   ],
                 ),
               ),
@@ -143,7 +143,7 @@ class _RestaurantPageDetailState extends State<RestaurantPageDetail> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Add to cart ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                        Text("Add to cart ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                         Icon(Icons.navigate_next_outlined,)
                       ],
                     ),

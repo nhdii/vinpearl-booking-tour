@@ -73,20 +73,27 @@ class _GolfPageDetailState extends State<GolfPageDetail> {
                         //Giá
                         Expanded(
                           flex: 4,
-                          child: Text("${golfServiceSnapshot!.golfService.gia} vnđ", style: TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold, fontSize: 22),)),
+                          child: Text(
+                            "${golfServiceSnapshot!.golfService.gia} vnđ",
+                            style: const TextStyle(
+                              color: Colors.orangeAccent,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22),
+                          )
+                        ),
                         Expanded(
                           flex: 1,
                           child: Row(
                             children: [
-                              Icon(Icons.star, size: 16, color: Colors.orangeAccent,),
-                              Text(golfServiceSnapshot!.golfService.xepLoai, style: TextStyle(fontSize: 16, ),)
+                              const Icon(Icons.star, size: 16, color: Colors.orangeAccent,),
+                              Text(golfServiceSnapshot!.golfService.xepLoai, style: const TextStyle(fontSize: 16, ),)
                             ],
                           )
                         )
                       ],
                     ),
 
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
 
                     Text(
                       golfServiceSnapshot!.golfService.tenDV,
@@ -96,22 +103,22 @@ class _GolfPageDetailState extends State<GolfPageDetail> {
                       ),
                     ),
 
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     Row(
                       children: [
-                        Icon(Icons.phone_rounded),
-                        SizedBox(width: 5,),
-                        Text(golfServiceSnapshot!.golfService.sdt, style: TextStyle(fontSize: 16),),
+                        const Icon(Icons.phone_rounded),
+                        const SizedBox(width: 5,),
+                        Text(golfServiceSnapshot!.golfService.sdt, style: const TextStyle(fontSize: 18),),
                       ],
                     ),
 
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     Row(
                       children: [
                         Image.asset("assets/images/maps-and-flags.png", width: 20,),
-                        SizedBox(width: 5,),
+                        const SizedBox(width: 5,),
                         Expanded(
-                            child: Text(golfServiceSnapshot!.golfService.diaChi, style: const TextStyle(fontSize: 16),))
+                            child: Text(golfServiceSnapshot!.golfService.diaChi, style: const TextStyle(fontSize: 18),))
                       ],
                     ),
                     const SizedBox(height: 10,),
@@ -119,14 +126,14 @@ class _GolfPageDetailState extends State<GolfPageDetail> {
                       children: [
                         const Icon(Icons.mail_outlined),
                         const SizedBox(width: 5,),
-                        Text(golfServiceSnapshot!.golfService.email)
+                        Text(golfServiceSnapshot!.golfService.email, style: TextStyle(fontSize: 18),)
                       ],
                     ),
 
-                    SizedBox(height: 20,),
-                    const Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                    SizedBox(height: 10,),
-                    Text(golfServiceSnapshot!.golfService.moTa, style: TextStyle(fontSize: 16),textAlign: TextAlign.justify,)
+                    const SizedBox(height: 20,),
+                    const Text("Description", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    const SizedBox(height: 10,),
+                    Text(golfServiceSnapshot!.golfService.moTa, style: const TextStyle(fontSize: 18),textAlign: TextAlign.justify,)
                   ],
                 ),
               ),
@@ -141,13 +148,13 @@ class _GolfPageDetailState extends State<GolfPageDetail> {
                       if(!cartProvider.isInCart(golfServiceSnapshot)){
                         cartProvider.addItemToCart(golfServiceSnapshot);
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                                 content: Text('Đã thêm vào giỏ hàng')
                             )
                         );
                       }else{
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(
+                            const SnackBar(content: Text(
                                 'Dịch vụ đã có trong giỏ hàng')
                             )
                         );
@@ -155,8 +162,8 @@ class _GolfPageDetailState extends State<GolfPageDetail> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Add to cart ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                        Icon(Icons.navigate_next_outlined,)
+                        const Text("Add to cart ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                        const Icon(Icons.navigate_next_outlined,)
                       ],
                     ),
                     style: ElevatedButton.styleFrom(
@@ -166,7 +173,7 @@ class _GolfPageDetailState extends State<GolfPageDetail> {
                           borderRadius: BorderRadius.circular(30)
                       ),
                       primary: Colors.orange[300],
-                      minimumSize: Size(220, 60),
+                      minimumSize: const Size(220, 60),
                     ),
                   ),
                 ),

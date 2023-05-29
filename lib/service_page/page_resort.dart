@@ -119,13 +119,12 @@ class _ResortPageState extends State<ResortPage> {
                                       child: Text(
                                         "${list[index].resortService!.tenDV}",
                                         style: const TextStyle(
-                                          fontSize: 18,
+                                          fontSize: 19,
                                           fontWeight: FontWeight.bold,
                                         ),
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
-                                    SizedBox(height: 15,),
                                     Expanded(
                                       child: Row(
                                         children: [
@@ -135,7 +134,7 @@ class _ResortPageState extends State<ResortPage> {
                                             flex: 3,
                                             child: Text("${list[index].resortService!.sdt}",
                                               style: const TextStyle(
-                                                  fontSize: 15,
+                                                  fontSize: 17,
                                                   fontWeight: FontWeight.bold
                                               ),),
                                           ),
@@ -146,14 +145,13 @@ class _ResortPageState extends State<ResortPage> {
                                             flex: 1,
                                             child: Text("${list[index].resortService!.xepLoai}",
                                               style: const TextStyle(
-                                                  fontSize: 15,
+                                                  fontSize: 17,
                                                   fontWeight: FontWeight.bold
                                               ),),
                                           )
                                         ],
                                       ),
                                     ),
-                                    const SizedBox(height: 15,),
                                     Expanded(
                                       child: Row(
                                         children: [
@@ -161,7 +159,7 @@ class _ResortPageState extends State<ResortPage> {
                                           Expanded(
                                             child: Text("${list[index].resortService!.diaChi}",
                                             style: const TextStyle(
-                                                fontSize: 15,
+                                                fontSize: 17,
                                                 fontWeight: FontWeight.bold
                                             ),
                                             overflow: TextOverflow.ellipsis,

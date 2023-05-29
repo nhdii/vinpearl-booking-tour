@@ -110,33 +110,33 @@ class _GolfPageState extends State<GolfPage> {
                                       Text(
                                         list[index].golfService!.tenDV,
                                         style: const TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 20,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      const SizedBox(height: 8,),
+                                      const SizedBox(height: 10,),
                                       Row(
                                         children: [
                                           const Icon(Icons.phone_rounded),
                                           const SizedBox(width: 5,),
-                                          Text(list[index].golfService!.sdt),
+                                          Text(list[index].golfService!.sdt, style: TextStyle(fontSize: 17),),
                                         ],
                                       ),
-                                      const SizedBox(height: 8,),
+                                      const SizedBox(height: 10,),
                                       Row(
                                         children: [
                                           Image.asset("assets/images/maps-and-flags.png", width: 20,),
                                           const SizedBox(width: 5,),
                                           Expanded(
-                                              child: Text(list[index].golfService!.diaChi, overflow: TextOverflow.ellipsis,))
+                                              child: Text(list[index].golfService!.diaChi, style: TextStyle(fontSize: 17), overflow: TextOverflow.ellipsis,))
                                         ],
                                       ),
-                                      const SizedBox(height: 8,),
+                                      const SizedBox(height: 10,),
                                       Row(
                                         children: [
                                           const Icon(Icons.mail_outlined),
                                           const SizedBox(width: 5,),
-                                          Text(list[index].golfService!.email)
+                                          Text(list[index].golfService!.email, style: TextStyle(fontSize: 17),)
                                         ],
                                       )
                                     ],

@@ -112,7 +112,7 @@ class RestaurantPage extends StatelessWidget {
                                       child: Text(
                                         list[index].restaurantService.tenDV,
                                         style: const TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 20,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -124,7 +124,7 @@ class RestaurantPage extends StatelessWidget {
                                         children: [
                                           Image.asset("assets/images/clock.png", width: 20,),
                                           const SizedBox(width: 5,),
-                                          Expanded(child: Text(list[index].restaurantService.openingTime, overflow: TextOverflow.ellipsis,))
+                                          Expanded(child: Text(list[index].restaurantService.openingTime, style: TextStyle(fontSize: 17), overflow: TextOverflow.ellipsis,))
                                         ],
                                       ),
                                     ),
@@ -135,7 +135,7 @@ class RestaurantPage extends StatelessWidget {
                                           Image.asset("assets/images/maps-and-flags.png", width: 20,),
                                           const SizedBox(width: 5,),
                                           Expanded(
-                                              child: Text(list[index].restaurantService.diaChi, overflow: TextOverflow.ellipsis,))
+                                              child: Text(list[index].restaurantService.diaChi,  style: TextStyle(fontSize: 17),overflow: TextOverflow.ellipsis,))
                                         ],
                                       ),
                                     ),
@@ -145,7 +145,7 @@ class RestaurantPage extends StatelessWidget {
                                         children: [
                                           const Icon(Icons.phone_rounded),
                                           const SizedBox(width: 5,),
-                                          Text(list[index].restaurantService.sdt),
+                                          Text(list[index].restaurantService.sdt, style: TextStyle(fontSize: 17),),
                                         ],
                                       ),
                                     ),

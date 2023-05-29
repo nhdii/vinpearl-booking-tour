@@ -113,13 +113,14 @@ class _CartPageState extends State<CartPage> {
         },
       ),
 
-      bottomNavigationBar: SizedBox(
+
+      //bottomNavigationBar để hiển thị tổng tiền và nút Đặt vé
+      bottomNavigationBar: SizedBox(    //SizeBox để tăng kích thước của bottomNavigationBar
         height: 100,
         child: Container(
           padding: const EdgeInsets.all(16),
           color: Colors.blueGrey[400],
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: Column(
@@ -142,6 +143,7 @@ class _CartPageState extends State<CartPage> {
                             content: Text("Giỏ hàng trống. Vui lòng chọn dịch vụ")),
                       );
                     }
+                    //Tạo đối tượng order
                     Order order = Order(
                       orders: cartItems.map((item) => OrderItem(
                         tenDV: item.getTenDV(),
@@ -157,12 +159,14 @@ class _CartPageState extends State<CartPage> {
                       cartItems.clear();
                       ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                              content: Text("Đặt thành công"))
+                              content: Text("Đặt thành công")
+                          )
                       );
                     }catch(e){
                       print('Error: $e');
                       ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Có lỗi xảy ra. Vui lòng thử lại sau."))
+                          const SnackBar(content: Text("Có lỗi xảy ra. Vui lòng thử lại sau.")
+                          )
                       );
                     }
                   },

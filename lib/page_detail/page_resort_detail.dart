@@ -74,7 +74,7 @@ class _ResortPageDetailState extends State<ResortPageDetail> {
                         //Giá
                         Expanded(
                           flex: 4,
-                          child: Text("${resortServiceSnapshot.resortService.gia} vnđ", style: const TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold, fontSize: 17),)),
+                          child: Text("${resortServiceSnapshot.resortService.gia} vnđ", style: const TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold, fontSize: 20),)),
                         Expanded(
                           child: Row(
                             children: [
@@ -89,7 +89,7 @@ class _ResortPageDetailState extends State<ResortPageDetail> {
                     Text(
                       resortServiceSnapshot.resortService.tenDV,
                       style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -99,7 +99,7 @@ class _ResortPageDetailState extends State<ResortPageDetail> {
                       children: [
                         const Icon(Icons.phone_rounded),
                         const SizedBox(width: 5,),
-                        Text(resortServiceSnapshot.resortService.sdt, style: const TextStyle(fontSize: 16),),
+                        Text(resortServiceSnapshot.resortService.sdt, style: const TextStyle(fontSize: 17),),
                       ],
                     ),
                     const SizedBox(height: 10,),
@@ -108,11 +108,11 @@ class _ResortPageDetailState extends State<ResortPageDetail> {
                         Image.asset("assets/images/maps-and-flags.png", width: 20,),
                         const SizedBox(width: 5,),
                         Expanded(
-                          child: Text(resortServiceSnapshot.resortService.diaChi, style: const TextStyle(fontSize: 16)))
+                          child: Text(resortServiceSnapshot.resortService.diaChi, style: const TextStyle(fontSize: 17)))
                       ],
                     ),
-                    const SizedBox(height: 10,),
-                    const Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                    const SizedBox(height: 20,),
+                    const Text("Description", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                     const SizedBox(height: 10,),
                     Text(resortServiceSnapshot.resortService.moTa, style: TextStyle(fontSize: 16),textAlign: TextAlign.justify,)
                   ],
@@ -153,7 +153,7 @@ class _ResortPageDetailState extends State<ResortPageDetail> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
-                        Text("Add to cart ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                        Text("Add to cart ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                         Icon(Icons.navigate_next_outlined,)
                       ],
                     ),

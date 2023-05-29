@@ -100,20 +100,20 @@ class _MeetingPageDetailState extends State<MeetingPageDetail> {
 
                     const SizedBox(height: 20,),
 
-                    const Text("Sức chứa", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                    const Text("Sức chứa", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                     const SizedBox(height: 15,),
                     Row(
                       children: [
                         Expanded(
                           child: Column(
                             children: [
-                              Image.asset("assets/images/theater.png", width: 25,),
+                              Image.asset("assets/images/theater.png", width: 30,),
                               const SizedBox(height: 8,),
                               Container(
                                 decoration: const BoxDecoration(
                                     border: Border(bottom: BorderSide(color: Colors.grey))
                                 ),
-                                child: const Text("NHÀ HÁT"),
+                                child: const Text("NHÀ HÁT", style: TextStyle(fontSize: 17),),
                               ),
                               const SizedBox(height: 8,),
                               Text("${meetingServiceSnapshot!.meetingService.nhaHat}")
@@ -123,13 +123,13 @@ class _MeetingPageDetailState extends State<MeetingPageDetail> {
                         Expanded(
                             child: Column(
                               children: [
-                                Image.asset("assets/images/classroom.png", width: 25,),
+                                Image.asset("assets/images/classroom.png", width: 30,),
                                 const SizedBox(height: 8,),
                                 Container(
                                     decoration: const BoxDecoration(
                                         border: Border(bottom: BorderSide(color: Colors.grey))
                                     ),
-                                    child: const Text("LỚP HỌC")
+                                    child: const Text("LỚP HỌC", style: TextStyle(fontSize: 17),)
                                 ),
                                 const SizedBox(height: 8,),
                                 Text(meetingServiceSnapshot!.meetingService.lopHoc)
@@ -139,13 +139,13 @@ class _MeetingPageDetailState extends State<MeetingPageDetail> {
                         Expanded(
                             child: Column(
                               children: [
-                                Image.asset("assets/images/meeting_u.png", width: 25,),
+                                Image.asset("assets/images/meeting_u.png", width: 30,),
                                 const SizedBox(height: 8,),
                                 Container(
                                     decoration: const BoxDecoration(
                                         border: Border(bottom: BorderSide(color: Colors.grey))
                                     ),
-                                    child: const Text("CHỮ U")
+                                    child: const Text("CHỮ U", style: TextStyle(fontSize: 17),)
                                 ),
                                 const SizedBox(height: 8,),
                                 Text(meetingServiceSnapshot!.meetingService.chuU)
@@ -162,13 +162,13 @@ class _MeetingPageDetailState extends State<MeetingPageDetail> {
                         Expanded(
                             child: Column(
                               children: [
-                                Image.asset("assets/images/da_tiec.png", width: 25,),
+                                Image.asset("assets/images/da_tiec.png", width: 30,),
                                 const SizedBox(height: 8,),
                                 Container(
                                     decoration: const BoxDecoration(
                                         border: Border(bottom: BorderSide(color: Colors.grey))
                                     ),
-                                    child: const Text("DẠ TIỆC")
+                                    child: const Text("DẠ TIỆC", style: TextStyle(fontSize: 17),)
                                 ),
                                 const SizedBox(height: 8,),
                                 Text(meetingServiceSnapshot!.meetingService.daTiec)
@@ -178,13 +178,13 @@ class _MeetingPageDetailState extends State<MeetingPageDetail> {
                         Expanded(
                             child: Column(
                               children: [
-                                Image.asset("assets/images/dry-martini.png", width: 25,),
+                                Image.asset("assets/images/dry-martini.png", width: 30,),
                                 const SizedBox(height: 8,),
                                 Container(
                                     decoration: const BoxDecoration(
                                         border: Border(bottom: BorderSide(color: Colors.grey))
                                     ),
-                                    child: const Text("COOKTAIL")
+                                    child: const Text("COOKTAIL", style: TextStyle(fontSize: 17),)
                                 ),
                                 const SizedBox(height: 8,),
                                 Text(meetingServiceSnapshot!.meetingService.cooktail)
@@ -196,9 +196,9 @@ class _MeetingPageDetailState extends State<MeetingPageDetail> {
                     ),
 
                     const SizedBox(height: 20,),
-                    const Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                    const Text("Description", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                     const SizedBox(height: 10,),
-                    Text(meetingServiceSnapshot!.meetingService.moTa, style: TextStyle(fontSize: 16),textAlign: TextAlign.justify,)
+                    Text(meetingServiceSnapshot!.meetingService.moTa, style: TextStyle(fontSize: 18),textAlign: TextAlign.justify,)
                   ],
                 ),
               ),
@@ -237,7 +237,7 @@ class _MeetingPageDetailState extends State<MeetingPageDetail> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
-                        Text("Add to cart ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                        Text("Add to cart ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                         Icon(Icons.navigate_next_outlined,)
                       ],
                     ),

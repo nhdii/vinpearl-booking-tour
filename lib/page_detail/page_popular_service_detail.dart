@@ -43,6 +43,8 @@ class _PopularServiceDetailState extends State<PopularServiceDetail> {
                         );
                       }).toList(),
                     ),
+
+                    //Hiển thị nút quay lại trang trước
                     Positioned(
                       child: Container(
                         width: MediaQuery.of(context).size.width,
@@ -61,6 +63,7 @@ class _PopularServiceDetailState extends State<PopularServiceDetail> {
                     ),
                   ]
               ),
+
               Container(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
@@ -68,21 +71,32 @@ class _PopularServiceDetailState extends State<PopularServiceDetail> {
                   children: [
                     Row(
                       children: [
-                        //Giá
+                        //Hiển thị giá
                         Expanded(
                             flex: 4,
-                            child: Text("${resortServiceSnapshot!.resortService.gia} vnđ", style: const TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold, fontSize: 17),)),
+                            child: Text(
+                              "${resortServiceSnapshot!.resortService.gia} vnđ",
+                              style: const TextStyle(
+                                  color: Colors.orangeAccent,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17),
+                            )
+                        ),
+
+                        //Hiển thị xếp loại
                         Expanded(
                             child: Row(
                               children: [
                                 const Icon(Icons.star, size: 16, color: Colors.orangeAccent,),
-                                Text(resortServiceSnapshot!.resortService.xepLoai, style: TextStyle(fontSize: 16),)
+                                Text(resortServiceSnapshot!.resortService.xepLoai, style: const TextStyle(fontSize: 16),)
                               ],
                             )
                         )
                       ],
                     ),
                     const SizedBox(height: 10,),
+
+                    //Hiển thị tên dịch vụ
                     Text(
                       resortServiceSnapshot!.resortService.tenDV,
                       style: const TextStyle(
@@ -92,6 +106,8 @@ class _PopularServiceDetailState extends State<PopularServiceDetail> {
                     ),
 
                     const SizedBox(height: 10,),
+
+                    //Hiển thị số điện thoại
                     Row(
                       children: [
                         const Icon(Icons.phone_rounded),
@@ -100,6 +116,8 @@ class _PopularServiceDetailState extends State<PopularServiceDetail> {
                       ],
                     ),
                     const SizedBox(height: 10,),
+
+                    //Hiển thị địa chỉ
                     Row(
                       children: [
                         Image.asset("assets/images/maps-and-flags.png", width: 20,),
@@ -109,50 +127,53 @@ class _PopularServiceDetailState extends State<PopularServiceDetail> {
                       ],
                     ),
                     const SizedBox(height: 10,),
+
+                    //Hiển thị mô tả dịch vụ
                     const Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                     const SizedBox(height: 10,),
-                    Text(resortServiceSnapshot!.resortService.moTa, style: TextStyle(fontSize: 16), textAlign: TextAlign.justify,)
+                    Text(resortServiceSnapshot!.resortService.moTa, style: const TextStyle(fontSize: 16), textAlign: TextAlign.justify,)
                   ],
                 ),
               ),
+
+              //Tạo nút thêm vào giỏ hàng
               Center(
                 child: Container(
                   width: 220,
                   padding: const EdgeInsets.only(bottom: 20, top: 20),
                   child: ElevatedButton(
                     onPressed: () {
-                      final cartProvider = Provider.of<CartData>(context, listen: false);
-
-                      if(!cartProvider.isInCart(resortServiceSnapshot)){
+                      final cartProvider = Provider.of<CartData>(context, listen: false);   //đối tượng cartProvider không đăng ký theo dõi sự thay đổi của giá trị
+                      if(!cartProvider.isInCart(resortServiceSnapshot)){                    // CartData trong cây cung cấp, để tránh việc tái cập nhật widget cho các sự thay đổi này.
                         cartProvider.addItemToCart(resortServiceSnapshot);
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                                 content: Text('Đã thêm vào giỏ hàng')
                             )
                         );
                       }else{
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(
+                            const SnackBar(content: Text(
                                 'Dịch vụ đã có trong giỏ hàng')
                             )
                         );
                       }
                     },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Add to cart ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                        Icon(Icons.navigate_next_outlined,)
-                      ],
-                    ),
                     style: ElevatedButton.styleFrom(
                       elevation: 10,
+                      backgroundColor: Colors.orange[300],
                       shadowColor: Colors.grey,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)
                       ),
-                      primary: Colors.orange[300],
-                      minimumSize: Size(220, 60),
+                      minimumSize: const Size(220, 60),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text("Add to cart ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                        Icon(Icons.navigate_next_outlined,)
+                      ],
                     ),
                   ),
                 ),

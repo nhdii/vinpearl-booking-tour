@@ -14,6 +14,7 @@ import 'package:vinpearl_app/service_page/page_restaurant.dart';
 import 'package:vinpearl_app/your_bill_page/your_bill.dart';
 
 import '../cart_page/cart_data.dart';
+import '../page_search/search_page.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -106,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                    mainAxisAlignment: MainAxisAlignment.center,
                    children: <Widget>[
                      CircleAvatar(
-                       child: Text(user!.email!.substring(0,1), style: const TextStyle(fontSize: 30),),
+                       child: Text(user!.email!.substring(0,1), style: const TextStyle(fontSize: 32),),
                        backgroundColor: Colors.deepPurple,
                        maxRadius: 30,
                      ),
@@ -119,28 +120,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
             ListTile(
               leading: const Icon(Icons.person_outline),
-              title: const Text('Profile', style: TextStyle(fontSize: 16),),
+              title: const Text('Profile', style: TextStyle(fontSize: 20),),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage(),));
               },
             ),
             ListTile(
               leading: const Icon(Icons.receipt_long_outlined),
-              title: const Text('Your Bill', style: TextStyle(fontSize: 16)),
+              title: const Text('Your Bill', style: TextStyle(fontSize: 20)),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => OrderHistoryPage(),));
               },
             ),
             ListTile(
               leading: const Icon(Icons.settings_outlined),
-              title: const Text('Setting', style: TextStyle(fontSize: 16)),
+              title: const Text('Setting', style: TextStyle(fontSize: 20)),
               onTap: () {
                 // Xử lý khi người dùng chọn mục cai dat
               },
             ),
             ListTile(
               leading: const Icon(Icons.logout_outlined),
-              title: const Text('Log Out', style: TextStyle(fontSize: 16)),
+              title: const Text('Log Out', style: TextStyle(fontSize: 20)),
               onTap: () {
                 signOut();
                 // Xử lý khi người dùng chọn mục log out
@@ -150,6 +151,21 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
 
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SearchPage(),
+              )
+          );
+        },
+        backgroundColor: Colors.blue,
+        child: const Icon(
+          Icons.search,
+          color: Colors.white,
+          size: 40,
+        ),),
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 28.0),
@@ -157,47 +173,11 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              const Text("VINPEARL", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.deepOrangeAccent),),
-              const Text("Booking your tour", style: TextStyle(fontSize: 25),),
-              const SizedBox(height: 35,),
-
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3), // Điều chỉnh hướng đổ bóng
-                    ),
-                  ],
-                ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search...',
-                    prefixIcon: const Icon(Icons.search),
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.clear),
-                      onPressed: () {
-                        // Xóa nội dung của TextField
-                      },
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide.none, // Xóa viền biên của TextField
-                    ),
-                    filled: true,
-                    fillColor: Colors.white, // Màu nền cho TextField
-                  ),
-                  onChanged: (value) {
-                    // Xử lý khi giá trị của TextField thay đổi
-                  },
-                ),
-              ),
+              const Text("VINPEARL", style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold, color: Colors.deepOrangeAccent),),
+              const Text("Booking your tour", style: TextStyle(fontSize: 30),),
 
               const SizedBox(height: 40,),
+
               const Text("Categories", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
 
               Container(
@@ -229,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Image.asset('assets/images/resort.png', width: 40,),
                             ),
                             const SizedBox(height: 15,),
-                            const Text("Resort", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),)
+                            const Text("Resort", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),)
                           ],
                         ),
                       ),
@@ -259,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Image.asset('assets/images/restaurant.png', width: 40,),
                             ),
                             const SizedBox(height: 15,),
-                            const Text("Restaurant", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),)
+                            const Text("Restaurant", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),)
                           ],
                         ),
                       ),
@@ -290,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Image.asset('assets/images/golf.png', width: 40,),
                             ),
                             const SizedBox(height: 15,),
-                            const Text("Golf", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),)
+                            const Text("Golf", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),)
                           ],
                         ),
                       ),
@@ -321,7 +301,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Image.asset('assets/images/meeting-room.png', width: 40,),
                             ),
                             const SizedBox(height: 15,),
-                            const Text("Meeting", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),)
+                            const Text("Meeting", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),)
                           ],
                         ),
                       ),
@@ -358,7 +338,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         childAspectRatio: 1.7,
                         mainAxisSpacing: 25,
                       ),
-                      // itemCount: popularServic`es.length,
+
                       itemCount: 4,
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
@@ -393,9 +373,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           child: Text(
                                             list[index].resortService!.tenDV,
                                             style: const TextStyle(
-                                                fontSize: 17,
+                                                fontSize: 18,
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors.blue
+                                                color: Colors.blue,
                                             ),
                                           ),
                                         ),
@@ -405,9 +385,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           child: Row(
                                             children: [
                                               const Icon(
-                                                Icons.phone_outlined, size: 22,
+                                                Icons.phone_outlined, size: 23,
                                               ),
-                                              Text(list[index].resortService.sdt,style: const TextStyle(fontSize: 16),)
+                                              Text(list[index].resortService.sdt,style: const TextStyle(fontSize: 17),)
                                             ],
                                           ),
                                         ),
@@ -418,10 +398,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                             children: [
                                               Image.asset(
                                                 "assets/images/maps-and-flags.png",
-                                                width: 22,),
+                                                width: 23,),
                                               Expanded(
                                                   child: Text(list[index].resortService!.diaChi,
-                                                    style: const TextStyle(fontSize: 16),
+                                                    style: const TextStyle(fontSize: 17),
                                                     overflow: TextOverflow.ellipsis,))
                                             ],
                                           ),
@@ -431,9 +411,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Expanded(
                                           child: Row(
                                             children: [
-                                              const Icon(Icons.star, size: 22),
+                                              const Icon(Icons.star, size: 23),
                                               Text(list[index].resortService!.xepLoai,
-                                                  style: const TextStyle(fontSize: 16)),
+                                                  style: const TextStyle(fontSize: 17)),
                                             ],
                                           ),
                                         ),

@@ -9,6 +9,7 @@ class Order {
     required this.email,
   });
 
+  //Biến đổi 1 đối tượng Order thành đối tượng map
   Map<String, dynamic> toJson() {
     return {
       'orders': this.orders.map((item) => item.toJson()).toList(),
@@ -59,6 +60,7 @@ class OrderItem {
   }
 }
 
+//class làm việc với firebase
 class OrderSnapshot {
   Order? order;
   DocumentReference? documentReference;
@@ -75,7 +77,9 @@ class OrderSnapshot {
     );
   }
 
+  //Sử dụng phương thức bất đồng bộ để thêm đơn hàng lên Firebase
   static Future<void> addOrderToFirebase(Order order) async {
+    //Tạo đối tượng để truy cập vào FirebaseStore
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     await firestore.collection('Order').add({
       'email': order.email,
@@ -88,17 +92,14 @@ class OrderSnapshot {
 
     try {
       QuerySnapshot querySnapshot = await firestore.collection('Order')
-          .where('email', isEqualTo: email)
-          .get();
-
+          .where('email', isEqualTo: email).get();
       List<OrderSnapshot> orders = [];
       for (DocumentSnapshot doc in querySnapshot.docs) {
         orders.add(OrderSnapshot.fromSnapshot(doc));
       }
-
       return orders;
     } catch (e) {
-      print("Error fetching orders from Firestore: $e");
+      print("Error: $e");
       return [];
     }
   }
